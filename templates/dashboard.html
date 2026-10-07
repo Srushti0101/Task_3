@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Dashboard</h1>
+
+<div class="cards">
+    {% for item in stats %}
+    <div class="card">
+        <div class="card-icon">{{ item.icon }}</div>
+        <div>
+            <p class="card-title">{{ item.title }}</p>
+            <h2 class="card-value">{{ item.value }}</h2>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="table-box">
+    <h2>Recent Orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.amount }}</td>
+                <td>
+                    <span class="badge {% if order.status == 'Delivered' %}green{% else %}orange{% endif %}">
+                        {{ order.status }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
